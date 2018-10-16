@@ -53,14 +53,14 @@ def create_console_handler(verbose_level):
     return clog
 
 
-def init_console_logging(verbose_level=2):
+def init_console_logging(verbose_level=1):
     """
     Set up the console logging for a transaction processor.
     Args:
         verbose_level (int): The log level that the console should print out
     """
     logger = logging.getLogger()
-    logger.setLevel(logging.DEBUG)
+    logger.setLevel(logging.INFO)
     logger.addHandler(create_console_handler(verbose_level))
 
 
@@ -76,12 +76,6 @@ def log_configuration(log_config=None, log_dir=None, name=None):
         logging.config.dictConfig(log_config)
     else:
         log_filename = os.path.join(log_dir, name)
-        debug_handler = logging.FileHandler(log_filename + "-debug.log")
-        debug_handler.setFormatter(logging.Formatter(
-            '[%(asctime)s.%(msecs)03d [%(threadName)s] %(module)s'
-            ' %(levelname)s] %(message)s', "%H:%M:%S"))
-        debug_handler.setLevel(logging.DEBUG)
-
         error_handler = logging.FileHandler(log_filename + "-error.log")
         error_handler.setFormatter(logging.Formatter(
             '[%(asctime)s.%(msecs)03d [%(threadName)s] %(module)s'
@@ -89,4 +83,3 @@ def log_configuration(log_config=None, log_dir=None, name=None):
         error_handler.setLevel(logging.ERROR)
 
         logging.getLogger().addHandler(error_handler)
-        logging.getLogger().addHandler(debug_handler)

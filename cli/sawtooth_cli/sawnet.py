@@ -122,7 +122,7 @@ def create_console_handler(verbose_level):
 
 def setup_loggers(verbose_level):
     logger = logging.getLogger()
-    logger.setLevel(logging.DEBUG)
+    logger.setLevel(logging.INFO)
     logger.addHandler(create_console_handler(verbose_level))
 
 
